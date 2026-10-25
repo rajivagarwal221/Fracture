@@ -415,8 +415,22 @@ namespace Valmon.Campaign
         }        private static Vector2 ReadMoveInput()
         {
             Vector2 input = Vector2.zero;
-            if (Keyboard.current != null) input = new Vector2((Keyboard.current.dKey.isPressed ? 1 : 0) - (Keyboard.current.aKey.isPressed ? 1 : 0), (Keyboard.current.wKey.isPressed ? 1 : 0) - (Keyboard.current.sKey.isPressed ? 1 : 0));
-            if (Gamepad.current != null) input += Gamepad.current.leftStick.ReadValue(); return Vector2.ClampMagnitude(input, 1);
+            if (Keyboard.current != null)
+                input = new Vector2(
+                    (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed ? 1 : 0) - (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed ? 1 : 0),
+                    (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed ? 1 : 0)   - (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed ? 1 : 0));
+            if (input == Vector2.zero)
+            {
+                try
+                {
+                    float h = (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ? 1f : 0f) - (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ? 1f : 0f);
+                    float v = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)   ? 1f : 0f) - (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) ? 1f : 0f);
+                    input = new Vector2(h, v);
+                }
+                catch { }
+            }
+            if (Gamepad.current != null) input += Gamepad.current.leftStick.ReadValue();
+            return Vector2.ClampMagnitude(input, 1);
         }
         private void MoveRemoteTamer()
         {

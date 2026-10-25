@@ -104,7 +104,7 @@ namespace Valmon.Campaign
                 "• R: Lock nearby gate (35 NRG)  •  F: Tactical radar scan (15 NRG)\n" +
                 "• Corrupt 6 distinct creatures for a +1 Bonus Point!\n\n" +
                 "TURN-BASED BATTLES:\n" +
-                "Corrupted creatures initiate combat upon capture. Select moves or switch Pokémon when it is your turn.";
+                "Corrupted creatures initiate combat upon capture. Select moves or switch Valmons when it is your turn.";
 
             Text(275, 195, 730, 340, content, new GUIStyle(textStyle) { fontSize = 14 });
 

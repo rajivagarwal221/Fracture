@@ -124,7 +124,7 @@ namespace Valmon.Campaign
                 bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
                 DrawCircleButton(new Rect(1035, 580, 54, 54), UITextures.SprintIcon(32, UITheme.ArenaGrass), "Shift", "Sprint", true, UITheme.ArenaGrass, 0f, isSprinting);
 
-                // Skill 3: [Z] Catch (Large 64x64 primary Pokéball button!)
+                // Skill 3: [Z] Catch (Large 64x64 primary Valmon ball button!)
                 bool nearWild = ScreenState == CampaignScreen.Explore && selected != null && !selected.captured;
                 float distance = (nearWild && World != null && World.tamer != null && selected.root != null)
                     ? Vector3.Distance(World.tamer.transform.position, selected.root.transform.position)

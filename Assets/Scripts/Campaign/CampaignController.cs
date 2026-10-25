@@ -253,11 +253,27 @@ namespace Valmon.Campaign
         private void MoveTamer()
         {
             Vector2 input = Vector2.zero;
+            // Primary: new Input System
             if (Keyboard.current != null)
             {
-                input.x = (Keyboard.current.dKey.isPressed ? 1 : 0) - (Keyboard.current.aKey.isPressed ? 1 : 0);
-                input.y = (Keyboard.current.wKey.isPressed ? 1 : 0) - (Keyboard.current.sKey.isPressed ? 1 : 0);
+                input.x = (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed ? 1 : 0)
+                        - (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed  ? 1 : 0);
+                input.y = (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed   ? 1 : 0)
+                        - (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed ? 1 : 0);
                 if (Keyboard.current.rKey.wasPressedThisFrame) World.ResetPlayer();
+            }
+            // Fallback: legacy Input Manager (works even if the new system fails to initialise)
+            if (input == Vector2.zero)
+            {
+                try
+                {
+                    float h = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ? 1f : 0f;
+                    h -= Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ? 1f : 0f;
+                    float v = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) ? 1f : 0f;
+                    v -= Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) ? 1f : 0f;
+                    input = new Vector2(h, v);
+                }
+                catch { }
             }
             if (Gamepad.current != null) input += Gamepad.current.leftStick.ReadValue();
             if (Mouse.current != null && Mouse.current.rightButton.isPressed)

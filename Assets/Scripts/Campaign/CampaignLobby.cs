@@ -203,7 +203,7 @@ namespace Valmon.Campaign
 
                     DrawBadge(new Rect(295, y + 16, 90, 24), i == 0 ? "GRASS" : (i == 1 ? "FIRE" : "WATER"), theme, Color.white, 11);
                     Text(395, y + 14, 400, 32, mapNames[i], headingStyle);
-                    Text(295, y + 54, 420, 24, i == 0 ? "Levels 1–15  •  10 Poké Balls  •  8 Minutes" : i == 1 ? "Levels 16–30  •  Ember Ruin Environment" : "Levels 31–50  •  Tidal Sanctuary", smallStyle);
+                    Text(295, y + 54, 420, 24, i == 0 ? "Levels 1–15  •  10 Valmon Balls  •  8 Minutes" : i == 1 ? "Levels 16–30  •  Ember Ruin Environment" : "Levels 31–50  •  Tidal Sanctuary", smallStyle);
 
                     bool isUnlocked = i <= unlocked;
                     if (ModernButton(new Rect(775, y + 26, 210, 48), isUnlocked ? (i == selectedLevel ? "SELECTED" : "SELECT") : "LOCKED", isUnlocked, i == selectedLevel, false, theme))
@@ -212,11 +212,7 @@ namespace Valmon.Campaign
                         menuStep = 2;
                     }
                 }
-<<<<<<< HEAD
-                Text(310,578,640,55,"10 Valmon Balls. 8 minutes. Catch 5 to advance. Your surviving team carries forward.");
-=======
-                Text(275, 545, 730, 30, "10 Poké Balls • 8 minutes • Catch 5 to advance • Surviving team carries forward", new GUIStyle(smallStyle) { alignment = TextAnchor.MiddleCenter });
->>>>>>> ui-redesign
+                Text(275, 545, 730, 30, "10 Valmon Balls • 8 minutes • Catch 5 to advance • Surviving team carries forward", new GUIStyle(smallStyle) { alignment = TextAnchor.MiddleCenter });
             }
             else if (menuStep == 2)
             {
@@ -240,15 +236,6 @@ namespace Valmon.Campaign
             }
             else
             {
-<<<<<<< HEAD
-                Text(410,132,590,45,"03 / ROLE & STARTER",headingStyle);
-                if(Button(new Rect(310,215,315,70),"TAMER",true,Role==PlayerRole.Tamer)) Role=PlayerRole.Tamer;
-                if(Button(new Rect(650,215,315,70),"CORRUPTOR",true,Role==PlayerRole.Corruptor)) Role=PlayerRole.Corruptor;
-                Text(312,306,650,65,Role==PlayerRole.Tamer?"Explore and capture creatures. Defeat corrupted Valmons in turn battles.":"Control corruption and the wild Valmons' moves. Eliminate the AI Tamer's team.");
-                Text(312,396,650,30,"TAMER'S STARTER",headingStyle);
-                for(int i=0;i<3;i++) if(Button(new Rect(310+i*223,443,210,68),catalog.Find(starterIds[i]).displayName,true,selectedStarter==i)) selectedStarter=i;
-                if(Button(new Rect(310,581,650,62),"ENTER THE HABITAT",true,true)) StartCampaign(selectedLevel,selectedCharacter,Role,starterIds[selectedStarter]);
-=======
                 Text(390, 115, 600, 40, "03 / ROLE & STARTER", headingStyle);
 
                 // Role selection pills
@@ -260,7 +247,7 @@ namespace Valmon.Campaign
                 if (ModernButton(wardenBtn, !isTamer ? "▶ WARDEN (SELECTED)" : "WARDEN", true, !isTamer, false, UITheme.CrimsonWarden)) Role = PlayerRole.Corruptor;
 
                 string roleDesc = Role == PlayerRole.Tamer
-                    ? "TAMER: Explore the arena, capture wild creatures with Poké Balls, and defeat corrupted Pokémon in turn battles."
+                    ? "TAMER: Explore the arena, capture wild creatures with Valmon Balls, and defeat corrupted Valmons in turn battles."
                     : "WARDEN: Control corruption, lock gates, set traps, and battle the AI Tamer to protect the rift.";
                 Text(285, 260, 710, 40, roleDesc, smallStyle);
 
@@ -283,7 +270,6 @@ namespace Valmon.Campaign
 
                 if (ModernButton(new Rect(285, 520, 710, 52), "ENTER THE HABITAT ▶", true, true))
                     StartCampaign(selectedLevel, selectedCharacter, Role, starterIds[selectedStarter]);
->>>>>>> ui-redesign
             }
         }
 
